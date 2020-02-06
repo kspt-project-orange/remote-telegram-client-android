@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#030303">
+
+    <TextView
+        android:id="@+id/textViewCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/code"
+        android:layout_marginTop="100dp"
+        android:textColor="#FF4000"
+        android:textStyle="bold|italic" />
+
+    <RelativeLayout android:id="@+id/RelativeLayout02"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+        <EditText
+            android:id="@+id/editTextCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:autofillHints=""
+            android:background="@drawable/rounded_edittext"
+            android:ems="10"
+            android:maxLength="5"
+            android:layout_centerInParent="true"
+            android:hint="@string/enter_your_code"
+            android:inputType="numberPassword"
+            android:singleLine="true"
+            android:textColor="#FF4000"
+            tools:targetApi="o" />
+    </RelativeLayout>
+
+    <RelativeLayout android:id="@+id/RelativeLayout01"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+        <Button
+            android:id="@+id/button_send_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/rounded_button"
+            android:onClick="onClick"
+            android:text="@string/next_button" />
+    </RelativeLayout>
+
+</LinearLayout>

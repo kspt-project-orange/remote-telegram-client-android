@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Remote Telegram Client</string>
+    <string name="code">Code:</string>
+    <string name="phone_number">Phone number:</string>
+    <string name="server_client_id">278892063012-qiocndj41oit32dbmiib8m27qrrjm097.apps.googleusercontent.com</string>
+    <string name="sign_out">Sign out</string>
+    <string name="next_button">Next</string>
+    <string name="enter_your_code">Enter your code</string>
+    <string name="enter_your_phone">Enter your phone</string>
+</resources>
