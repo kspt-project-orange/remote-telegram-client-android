@@ -1,7 +1,7 @@
 package com.example.remotetelegramclient.api.response
 
 interface ResponseListener {
-    fun onResponseReceived(data: String?)
+    fun onResponseReceived()
 
     fun onErrorReceived(data: String?)
 }

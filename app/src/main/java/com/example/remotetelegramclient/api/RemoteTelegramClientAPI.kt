@@ -1,5 +1,6 @@
 package com.example.remotetelegramclient.api
 
+import com.example.remotetelegramclient.api.request.ApiRequest
 import com.example.remotetelegramclient.api.request.AttachDriveRequest
 import com.example.remotetelegramclient.api.request.CodeRequest
 import com.example.remotetelegramclient.api.request.SignInRequest
@@ -18,6 +19,9 @@ interface RemoteTelegramClientAPI {
 
     @POST("/v0/auth/attachDrive")
     fun sendGDriveCredentialsToAPI(@Body attachDriveRequest: AttachDriveRequest): Call<ApiResponse?>
+
+    @POST("/v0/tgToDrive/startProcessing")
+    fun sendSynchronizationToAPI(@Body apiRequest: ApiRequest): Call<ApiResponse?>
 
 //    @DELETE("signOut")
 //    fun sendSignOutToAPI(@Query("q") token: String?): Call<ApiResponse?>

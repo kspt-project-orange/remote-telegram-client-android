@@ -2,6 +2,7 @@ package com.example.remotetelegramclient.api
 
 import android.util.Log
 import com.example.remotetelegramclient.BuildConfig
+import com.example.remotetelegramclient.api.request.ApiRequest
 import com.example.remotetelegramclient.api.request.AttachDriveRequest
 import com.example.remotetelegramclient.api.request.CodeRequest
 import com.example.remotetelegramclient.api.request.SignInRequest
@@ -36,7 +37,7 @@ class RestController(private val listener : ResponseListener) : Callback<ApiResp
             val result: ApiResponse? = response.body()
             apiServerToken = result?.token ?: apiServerToken
             if (result?.status == "OK")
-                listener.onResponseReceived(result.toString())
+                listener.onResponseReceived()
             else
                 listener.onErrorReceived(result?.status)
         } else {
@@ -78,6 +79,16 @@ class RestController(private val listener : ResponseListener) : Callback<ApiResp
                     apiServerToken,
                     idToken,
                     serverAuthCode
+                )
+            )
+        call?.enqueue(this)
+    }
+
+    fun startSynchronization() {
+        val call: Call<ApiResponse?>? =
+            remoteTelegramClientAPI?.sendSynchronizationToAPI(
+                ApiRequest(
+                    apiServerToken
                 )
             )
         call?.enqueue(this)

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Remote Telegram Client</string>
+    <string name="code">Код из Telegram:</string>
+    <string name="enter_your_code">Введите код</string>
+    <string name="enter_your_phone">Введите номер</string>
+    <string name="next_button">Далее</string>
+    <string name="phone_number">Номер телефона:</string>
+    <string name="sign_out">Выйти</string>
+    <string name="sync">Синхронизация</string>
+</resources>

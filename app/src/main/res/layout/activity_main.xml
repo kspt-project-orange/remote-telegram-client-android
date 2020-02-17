@@ -33,6 +33,21 @@
         tools:layout_editor_absoluteY="60dp" />
 
     <Button
+        android:id="@+id/button_synchronization"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="350dp"
+        android:background="@drawable/rounded_button"
+        android:gravity="center"
+        android:onClick="onClick"
+        android:text="@string/sync"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toStartOf="@+id/tg_first_view"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toEndOf="@+id/tg_first_view"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
         android:id="@+id/button_sign_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

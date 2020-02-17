@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.server_client_id))
                 .requestServerAuthCode(getString(R.string.server_client_id))
-                .requestScopes(Scope(Scopes.DRIVE_APPFOLDER))
+                .requestScopes(Scope(Scopes.DRIVE_FULL))
                 .requestEmail()
                 .build()
 
@@ -98,8 +98,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
 
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>?) {
         try {
-            val account = completedTask?.getResult(ApiException::class.java)
-            onResponseReceived(account.toString())
+            completedTask?.getResult(ApiException::class.java)
+            onResponseReceived()
         } catch (e: ApiException) {
             Log.w(TAG, "handleSignInResult:error", e)
             onErrorReceived(e.message)
@@ -120,10 +120,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.button_sign_in    -> signIn()
-            R.id.button_sign_out   -> signOut()
-            R.id.button_send_phone -> sendPhoneToAPI()
-            R.id.button_send_code  -> sendCodeToAPI()
+            R.id.button_sign_in         -> signIn()
+            R.id.button_sign_out        -> signOut()
+            R.id.button_send_phone      -> sendPhoneToAPI()
+            R.id.button_send_code       -> sendCodeToAPI()
+            R.id.button_synchronization -> sendStartSynchronizationToAPI()
         }
     }
 
@@ -141,7 +142,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
         }
     }
 
-    override fun onResponseReceived(data: String?) {
+    private fun sendStartSynchronizationToAPI() {
+        if (gDriveServerAuthCode != null && gDriveIdToken != null) {
+            restController.startSynchronization()
+        }
+    }
+
+//  Not the smartest approach to updating UI elements, should be rewritten
+    override fun onResponseReceived() {
         if (tg_first_view.visibility  == View.VISIBLE) {
             tg_first_view.visibility  = View.GONE
             tg_second_view.visibility = View.VISIBLE
@@ -153,13 +161,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
             return
         }
         if (button_sign_in.visibility  == View.VISIBLE) {
-            button_sign_in.visibility  = View.INVISIBLE
-            button_sign_out.visibility = View.VISIBLE
+            button_sign_in.visibility         = View.INVISIBLE
+            button_synchronization.visibility = View.VISIBLE
+            button_sign_out.visibility        = View.VISIBLE
             return
         }
-        if (button_sign_out.visibility == View.VISIBLE) {
-            button_sign_out.visibility = View.INVISIBLE
-            tg_first_view.visibility   = View.VISIBLE
+        if (GoogleSignIn.getLastSignedInAccount(this) == null) {
+            button_synchronization.visibility = View.INVISIBLE
+            button_sign_out.visibility        = View.INVISIBLE
+            tg_first_view.visibility          = View.VISIBLE
             return
         }
     }
